@@ -32,7 +32,8 @@ Containers remove the need for a full guest OS, making them lightweight and fast
 Container Runtime:
 
 Container runtime is a software responsible for running and managing containers
-It helps in starting, stopping, and tracking containers that are currently running
+It helps in starting, stopping, and tracking containers that are currently running.
+
 
 Commands:
 
