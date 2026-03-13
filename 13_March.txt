@@ -1,0 +1,148 @@
+Real world analogy behind namespaces:
+
+It can be compared to separate cabins in a train
+
+Same engine (kernel)
+Different passengers in each cabin
+Passengers cannot see or interact with others
+
+So, each container runs independently but still shares the same system underneath
+
+Control Groups (cgroups):
+
+cgroups are a feature of the Linux kernel that manage and restrict how much resources a container can use
+
+They make sure:
+
+No single container takes all resources
+CPU, memory, and I/O are shared properly
+
+In simple terms, namespaces isolate containers, while cgroups control their resource usage
+
+Need of cgroups:
+
+If cgroups are not used:
+
+One container may consume all CPU or memory
+Other containers and even the system can become unstable or crash
+
+Types of resources controlled:
+
+CPU → control usage and assign priority
+Memory → set limits and stop container if exceeded
+Disk I/O → manage read and write speed
+Network → indirectly controlled
+
+Real world analogy (cgroups):
+
+Similar to electricity meters in apartments
+
+Each apartment has a usage limit
+No one can consume all the electricity
+
+Task 1:
+
+If a faulty container crashes the system due to high memory usage:
+
+Missing feature → cgroups
+Kernel mechanism → cgroups
+Are namespaces enough? → No, they only isolate but don’t limit resources
+
+Task 2:
+
+There are 3 containers:
+
+A → heavy CPU usage
+B → web server
+C → database
+
+CPU control → handled by cgroups
+Process isolation → handled by PID namespace
+Same port usage → handled by Network namespace
+
+Container Images:
+
+An image is a read-only template used to create containers
+
+It contains:
+
+Base OS
+Application code
+Required libraries
+Runtime environment
+Configuration
+
+Once created, an image cannot be modified
+
+Example: python:3.11-slim
+
+Layering:
+
+Images are created in multiple layers:
+
+OS → runtime → application → dependencies
+
+Each layer is added on top of the previous one
+
+Image vs Container:
+
+Image → fixed and read-only
+Container → running instance that can be modified
+
+Image Registry:
+
+A registry is a central place where images are stored and managed
+
+It helps in:
+
+Sharing images easily
+Maintaining the same setup across environments
+Supporting CI/CD workflows
+
+Why registry is needed:
+
+Without a registry:
+
+Images need to be built repeatedly
+No proper version control
+Different environments may behave differently
+
+With a registry:
+
+Build once and use anywhere
+Faster deployments
+Easy to switch between versions
+
+Types:
+
+Public → open for everyone
+Private → restricted and secure
+
+Examples:
+
+Amazon Elastic Container Registry
+Azure Container Registry
+
+Image naming:
+
+format:
+<registry>/<namespace>/<image>:<tag>
+
+example:
+docker.io/aastha/webapp:v1
+
+Push and Pull:
+
+Push → send image to registry
+Pull → download image from registry
+
+Only new or changed layers are transferred
+
+CI/CD flow:
+
+Code → build image → push to registry → deploy container
+
+Comparison:
+
+Public → less secure, open access
+Private → more secure, controlled access
