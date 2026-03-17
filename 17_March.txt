@@ -1,0 +1,30 @@
+Docker Commands:
+
+docker pull nginx
+Downloads the nginx image from the registry to the local system
+
+docker run -d -p 80:80 --name mynginx nginx
+Starts an nginx container in the background and makes it accessible in the browser
+
+Purpose of flags:
+
+-d → runs container in background so terminal can be used for other work
+-p → connects host port with container port for access
+--name → assigns a custom name to the container
+
+Basic Commands:
+
+docker ps
+Displays all currently running containers
+
+docker stop mynginx
+Stops the running container
+
+docker start <container_id>
+Restarts a container that was stopped
+
+docker rm -f mynginx
+Deletes the container forcefully, even if it is still running
+
+docker rmi nginx
+Deletes the nginx image from the system
