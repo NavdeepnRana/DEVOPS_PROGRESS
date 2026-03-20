@@ -1,0 +1,109 @@
+Docker Apache (httpd) Practice Guide
+Core Mental Model
+
+Image → Container → Port Mapping → Browser
+
+Image = base template of the application
+Container = running version of that image
+Port mapping = link between your system and the container
+
+Pull Apache Image
+
+docker pull httpd
+Downloads the Apache image to your system
+
+Verify
+
+docker images httpd
+Checks if the image is available locally
+
+Run Container
+
+docker run -d -p 8081:80 --name task3 httpd
+Starts the Apache container in the background
+
+Breakdown
+
+-d → runs container in background so terminal remains free
+-p 8081:80 → connects system port 8081 to container port 80
+--name task3 → assigns a custom name to the container
+
+Check Containers
+
+docker ps → shows running containers
+docker ps -a → shows all containers
+
+Access in Browser
+
+http://localhost:8081
+
+Open this in browser to see Apache running
+
+Modify Content (Method 1: docker exec)
+
+Enter container
+docker exec -it task3 /bin/bash
+
+Go to directory
+cd /usr/local/apache2/htdocs/
+
+Update file
+echo "<h1>Hello Aastha</h1>" > index.html
+
+Exit container
+exit
+
+Modify Content (Method 2: Volume Mount)
+
+Remove existing container
+docker rm -f task3
+
+Create folder and file
+mkdir mysite
+cd mysite
+echo "<h1>From Local Folder</h1>" > index.html
+
+Run container with volume
+docker run -d -p 8081:80 --name task3 -v $(pwd):/usr/local/apache2/htdocs/ httpd
+
+Important Concepts
+
+Apache serves the default file named index.html
+
+Containers are temporary in nature
+Images remain unchanged and act as the base
+
+Common Errors
+
+Container name already exists
+Fix → docker rm -f task3
+
+Image not available locally
+Fix → docker pull httpd
+
+vi editor not present inside container
+Fix → use echo command to create/update files
+
+Trying to open URL in terminal
+Always open it in a browser
+
+DevOps Mindset
+
+Always verify instead of assuming
+
+Useful commands:
+docker images
+docker ps
+docker logs <container>
+
+Full Practice Flow
+
+docker rm -f task3
+docker pull httpd
+docker run -d -p 8081:80 --name task3 httpd
+docker ps
+
+docker exec -it task3 /bin/bash
+cd /usr/local/apache2/htdocs/
+echo "<h1>Practice</h1>" > index.html
+exit
