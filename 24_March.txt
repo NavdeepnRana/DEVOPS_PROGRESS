@@ -1,0 +1,157 @@
+Docker Notes (Run Commands + Flags + Environment Variables)
+Core Concepts (First Principles)
+
+Image = base template of an application
+Container = running instance of that template
+Docker = platform used to run and manage containers
+
+docker run = combines image + configuration + execution
+
+Basic Commands
+
+docker --version
+Shows installed Docker version
+
+docker info
+Displays system-level Docker details
+
+Image Commands
+
+docker pull httpd
+Downloads the Apache image
+
+docker images
+Lists all available images
+
+docker history httpd
+Shows how the image was built layer by layer
+
+Container Basics
+
+docker run ubuntu
+Runs a container from Ubuntu image
+
+Problem:
+Container stops immediately if no active process is running
+
+Important Flags
+
+Detached mode (-d)
+docker run -d httpd
+Runs container in background
+
+Interactive mode (-it)
+docker run -it ubuntu bash
+Opens terminal inside container
+
+Name container (--name)
+docker run --name my-container httpd
+Assigns a custom name
+
+Auto remove (--rm)
+docker run --rm ubuntu
+Removes container automatically after it stops
+
+Port mapping (-p)
+docker run -d -p 8080:80 httpd
+Connects system port 8080 to container port 80
+
+Open in browser:
+http://localhost:8080
+
+Environment variables (-e)
+docker run -e MY_VAR=value ubuntu env
+Passes variables inside container
+
+Volume mount (-v)
+docker run -v /host/path:/container/path ubuntu
+Used to store data permanently
+
+Running Commands Inside Container
+
+Wrong way:
+docker run httpd echo "hello world"
+This just prints output and exits
+
+Correct way:
+docker run ubuntu sh -c 'echo "hello" > file.txt'
+Runs command properly inside container
+
+Environment Variables
+
+Without -e
+docker run ubuntu env
+Shows default environment variables
+
+With -e
+docker run -e MY_VAR=value ubuntu env
+Adds custom variable
+
+Multiple variables
+docker run -e APP_ENV=production -e APP_VERSION=1.0 nginx
+
+Interactive example
+docker run -it -e MY_NAME=aastha ubuntu bash
+
+Inside container:
+echo $MY_NAME
+
+Passing Env Variables from Host
+
+Method 1
+export MY_VAR=hello
+docker run -e MY_VAR=$MY_VAR ubuntu env
+
+Method 2
+export MY_VAR=hello
+docker run -e MY_VAR ubuntu env
+
+Combined Example
+
+docker run -dit --name webapp -p 8080:80 -e APP_ENV=production httpd
+
+Runs container in background with terminal support, port mapping, and environment variable
+
+Common Mistakes
+
+Typing wrong image name
+docker run ununtu
+Correct → docker run ubuntu
+
+Wrong environment variable format
+-e MY VAR=value
+Correct → -e MY_VAR=value
+
+Wrong command usage
+$docker --version
+Correct → docker --version
+
+Mental Model
+
+Before running a container, think:
+
+Do I need image or container
+Should it run in background or foreground
+Do I need terminal access
+Do I need port mapping
+Do I need environment variables
+
+Practice
+
+docker pull httpd
+docker run -d -p 8080:80 httpd
+docker ps
+
+Open in browser:
+http://localhost:8080
+
+Key Takeaway
+
+docker run = create + configure + start container
+
+Checkpoint
+
+docker run -d -p 8080:80 -e ENV=prod httpd
+
+Flow:
+Image → container created → port mapped → environment set → process started
