@@ -1,0 +1,101 @@
+Docker Notes (Run Commands + Flags + Env Variables)
+Core Concepts
+
+Image = base template of an application
+Container = running instance created from that image
+docker run = used to create, configure, and start a container in one step
+
+Basic Commands
+
+docker --version
+Shows Docker version installed
+
+docker info
+Gives detailed information about Docker system
+
+Images
+
+docker pull httpd
+Downloads the Apache image
+
+docker images
+Lists all available images
+
+Run Container
+
+docker run ubuntu
+Runs a container from Ubuntu image
+
+Note:
+Container stops immediately if no active process is running inside it
+
+Important Flags
+
+-d → runs container in background
+-it → opens interactive terminal
+--name → assigns a custom name
+--rm → removes container automatically after stop
+-p → maps ports (host to container)
+-e → passes environment variables
+-v → mounts volume for persistent data
+
+Example:
+docker run -d -p 8080:80 httpd
+Runs Apache in background and exposes it on port 8080
+
+Env Variables
+
+docker run -e MY_VAR=value ubuntu env
+Creates and passes variable inside container
+
+From host system:
+export MY_VAR=hello
+docker run -e MY_VAR ubuntu env
+
+Run Commands Inside Container
+
+Wrong:
+docker run httpd echo "hello"
+This only prints output and exits
+
+Correct:
+docker run ubuntu sh -c 'echo "hello" > file.txt'
+Runs command properly inside container
+
+Common Mistakes
+
+Using incorrect image name
+Wrong syntax for environment variables
+Forgetting to use -d for background execution
+Incorrect port mapping format
+
+Mental Model
+
+Before running a container, think:
+
+Do I need port mapping
+Do I need environment variables
+Do I need terminal access
+
+Flow
+
+docker run -d -p 8080:80 -e ENV=prod httpd
+
+Image → container created → port mapped → environment set → process started
+
+Key Takeaway
+
+docker run = everything in one command (create + configure + start)
+
+logs → shows what container is doing
+inspect → shows configuration details
+stats → shows performance and resource usage
+
+Extra (Important)
+
+Dockerfile → used to build custom images
+Docker Compose → used to run multiple containers together
+
+Containers share the host system kernel
+
+Volumes are used to store data permanently, even if the container is removed
