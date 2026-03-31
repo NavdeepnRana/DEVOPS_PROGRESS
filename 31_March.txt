@@ -1,0 +1,73 @@
+Docker Commands Practice
+
+1. Run Container
+
+docker run -d -p 8080:80 --name my-nginx nginx
+Used to run an nginx container in the background and expose it on port 8080
+
+2. Logs
+
+docker logs <container_id>
+Used to check container output
+
+docker logs -f <container_id>
+Used to see logs in real time
+
+3. Stats
+
+docker stats
+Used to monitor CPU, memory, and network usage of running containers
+
+4. Exec (Enter Container)
+
+docker exec -it <container_id> bash
+Used to open a terminal inside the container
+
+If bash is not available:
+docker exec -it <container_id> sh
+
+Common mistake:
+docker exec -it <container_id>
+(Command is incomplete without specifying bash or sh)
+
+5. File Operations
+
+mkdir /data
+echo "hello docker" > /data/test.txt
+
+Used to create folders and files inside the container
+
+6. Copy Files
+
+Container → Host
+docker cp <container_id>:/data/test.txt ~/Desktop
+
+Host → Container
+docker cp ~/Desktop/test.txt <container_id>:/data/sample.txt
+
+Used to transfer files between host and container
+
+7. Read File
+
+docker exec -it <container_id> cat /data/sample.txt
+Used to view file content inside container
+
+Multiple commands:
+docker exec -it <container_id> sh -c "ls /data && cat /data/sample.txt"
+
+8. docker attach
+
+docker attach <container_id>
+Used to connect to the main process of the container
+
+Warning:
+Pressing Ctrl+C will stop the container
+
+Mental Model
+
+docker run → create and start container
+docker exec → run commands inside container
+docker logs → check output
+docker stats → monitor performance
+docker cp → transfer files
+docker attach → control main process
