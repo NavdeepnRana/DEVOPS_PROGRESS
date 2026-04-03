@@ -1,0 +1,73 @@
+Docker Volume Notes
+Basic Understanding
+
+Container = temporary, data gets deleted when container is removed
+Volume = permanent storage, data remains even after container deletion
+
+Step 1: Create Volume
+
+docker volume create projectdata
+Creates a new volume named projectdata
+
+Step 2: Verify
+
+docker volume ls
+Lists all available volumes
+
+docker volume inspect projectdata
+Shows detailed information about the volume
+
+Mount path:
+/var/lib/docker/volumes/projectdata/_data
+This is where the volume data is stored on the host system
+
+Step 3: Run Container with Volume
+
+docker run -dit --name project_container -v projectdata:/app/data ubuntu
+Starts a container and attaches the volume to /app/data
+
+Step 4: Create File
+
+docker exec -it project_container bash
+Enter the container
+
+cd /app/data
+
+echo "this is my first volume" > report.txt
+Create a file inside the mounted volume
+
+Step 5: Verify
+
+ls /app/data
+Check if file exists
+
+cat /app/data/report.txt
+View file content
+
+Step 6: Remove Container
+
+docker rm -f project_container
+Deletes the container but keeps the volume data safe
+
+Step 7: Run New Container
+
+docker run -dit --name proj_container_new -v projectdata:/app/data ubuntu
+Starts a new container using the same volume
+
+Step 8: Check Persistence
+
+docker exec -it proj_container_new ls /app/data
+Check if file still exists
+
+docker exec -it proj_container_new cat /app/data/report.txt
+Read file content
+
+Expected output:
+
+report.txt
+this is my first volume
+
+Key Understanding
+
+Even after deleting the first container, the data is not lost
+This proves that volumes store data independently of containers
