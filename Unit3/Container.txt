@@ -1,0 +1,24 @@
+Containers
+
+Containers provide isolated environments that package an application together with everything it needs to run. This helps maintain the same behavior across different environments.
+
+Features
+Lightweight compared to virtual machines
+Use the host OS kernel
+Easily portable between systems
+Require fewer system resources
+Launch very quickly
+
+Benefits
+Reliable and consistent deployments
+Efficient use of hardware resources
+Simplified scaling and maintenance
+Easy application migration across platforms
+Well-suited for microservices-based applications
+Example
+
+A web application can be packaged inside a container along with its dependencies, allowing it to run consistently on any machine.
+
+Key Point
+
+Containers bundle applications and their dependencies into a single package, enabling faster deployment, portability, and easier management.
