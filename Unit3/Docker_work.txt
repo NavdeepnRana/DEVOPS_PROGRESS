@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Docker Nginx Demo</title>
+</head>
+<body>
+    <h1>Dockerized Nginx Website</h1>
+    <p>This page is being served from an Nginx container.</p>
+</body>
+</html>
+
+server {
+    listen 80;
+    server_name localhost;
+
+    location / {
+        root /usr/share/nginx/html;
+        index index.html;
+    }
+}
+
+
+FROM nginx:alpine
+
+COPY index.html /usr/share/nginx/html/
+COPY default.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 80
