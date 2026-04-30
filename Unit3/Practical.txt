@@ -1,0 +1,93 @@
+Docker Compose for WordPress and MySQL
+
+This setup runs a WordPress website along with a MySQL database using Docker Compose.
+
+docker-compose.yml
+version: "3.9"
+
+services:
+  blog:
+    image: wordpress:latest
+    container_name: wp-site
+    ports:
+      - "8080:80"
+    environment:
+      WORDPRESS_DB_HOST: mysql:3306
+      WORDPRESS_DB_USER: adminuser
+      WORDPRESS_DB_PASSWORD: adminpass
+      WORDPRESS_DB_NAME: wordpressdb
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-service
+    restart: always
+    environment:
+      MYSQL_DATABASE: wordpressdb
+      MYSQL_USER: adminuser
+      MYSQL_PASSWORD: adminpass
+      MYSQL_ROOT_PASSWORD: root123
+    volumes:
+      - mysql_storage:/var/lib/mysql
+
+volumes:
+  mysql_storage:
+Run Services
+docker compose up -d
+Access WordPress
+http://localhost:8080
+Key Point
+
+Docker Compose allows multiple containers such as WordPress and MySQL to be managed together through a single configuration file.
+
+Docker Compose for Node.js and MongoDB
+
+This project connects a Node.js application with a MongoDB database using Docker Compose.
+
+docker-compose.yml
+version: "3.9"
+
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - MONGO_URL=mongodb://mongo:27017/demoapp
+    depends_on:
+      - mongo
+    restart: always
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_storage:/data/db
+    restart: always
+
+volumes:
+  mongo_storage:
+Dockerfile
+FROM node:20-alpine
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 3000
+
+CMD ["npm","start"]
+Build and Start
+docker compose up --build -d
+Verify Containers
+docker ps
+Key Point
+
+Docker Compose simplifies the deployment of multi-container applications by defining services, networks, and volumes in a single file.
