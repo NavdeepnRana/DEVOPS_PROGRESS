@@ -1,0 +1,26 @@
+Project Object Model (POM)
+
+Project Object Model (POM) is the main configuration file used by Maven in Java projects. It is stored in a file named pom.xml and contains the information Maven needs to build and manage the application.
+
+The POM file defines project settings such as dependencies, plugins, version details, and build configurations. Maven reads this file and automatically downloads the required libraries from repositories.
+
+Main Elements of POM
+Group ID, Artifact ID, and Version
+Project Dependencies
+Build Plugins
+Repository Details
+Properties and Profiles
+Project Information
+Benefits
+Automatic dependency handling
+Standard project organization
+Simplified build process
+Easier deployment and maintenance
+Better consistency across projects
+Example
+
+If an application uses Spring Boot, MySQL, and JUnit, their dependencies can be added to the pom.xml file. Maven will then download and configure them automatically.
+
+Key Point
+
+The POM file serves as the central configuration of a Maven project, helping automate dependency management, project builds, and deployment tasks.
