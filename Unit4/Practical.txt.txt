@@ -1,0 +1,127 @@
+Full Stack Docker Deployment with Spring Boot, React, and PostgreSQL
+
+This project shows how multiple services can be deployed together using Docker Compose. The setup includes a PostgreSQL database, a Spring Boot backend, and a React frontend.
+
+Step 1: Environment Configuration
+
+Create a .env file to store database and application settings.
+
+POSTGRES_DB=projectdb
+POSTGRES_USER=admin
+POSTGRES_PASSWORD=admin123
+
+SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/projectdb
+SPRING_DATASOURCE_USERNAME=admin
+SPRING_DATASOURCE_PASSWORD=admin123
+
+REACT_APP_API_URL=http://localhost:8080
+Step 2: Docker Compose File
+
+Create a docker-compose.yml file.
+
+services:
+
+  db:
+    image: postgres:16
+    container_name: pg_database
+    restart: always
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - pg_storage:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  backend:
+    build: ./backend
+    container_name: spring_app
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+    ports:
+      - "8080:8080"
+
+  frontend:
+    build: ./frontend
+    container_name: react_client
+    depends_on:
+      - backend
+    environment:
+      REACT_APP_API_URL: ${REACT_APP_API_URL}
+    ports:
+      - "3000:3000"
+
+volumes:
+  pg_storage:
+Step 3: Backend Dockerfile
+
+Navigate to the backend directory and create a Dockerfile.
+
+FROM eclipse-temurin:17-jre
+
+WORKDIR /application
+
+COPY target/*.jar backend.jar
+
+EXPOSE 8080
+
+ENTRYPOINT ["java","-jar","backend.jar"]
+Step 4: Maven Dependencies
+
+The backend project uses Maven for dependency management.
+
+Required libraries:
+
+Spring Boot Web
+Spring Data JPA
+PostgreSQL Driver
+Spring Boot Maven Plugin
+
+These dependencies allow the application to create REST APIs and communicate with the PostgreSQL database.
+
+Step 5: React Frontend
+
+Modify App.js to display a custom message.
+
+import "./App.css";
+
+function App() {
+  return (
+    <div className="App">
+      <h1>Dockerized Full Stack Application</h1>
+      <p>React Frontend Connected with Spring Boot and PostgreSQL.</p>
+    </div>
+  );
+}
+
+export default App;
+Step 6: Start the Application
+
+Build and launch all containers.
+
+docker compose up --build -d
+
+Check running containers:
+
+docker ps
+Access URLs
+
+Frontend:
+
+http://localhost:3000
+
+Backend:
+
+http://localhost:8080
+
+Database:
+
+localhost:5432
+Key Point
+
+Docker Compose helps manage multiple services from a single configuration file. It simplifies the deployment of full-stack applications by connecting the frontend, backend, and database containers automatically.
