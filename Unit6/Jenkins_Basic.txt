@@ -1,0 +1,53 @@
+Jenkins Fundamentals
+Introduction to Jenkins
+
+Jenkins is a widely used automation server that helps automate software development activities such as compiling code, running tests, and deploying applications.
+
+It plays a major role in implementing Continuous Integration (CI) and Continuous Delivery (CD) practices.
+
+Importance of Jenkins
+Automates repetitive development tasks
+Reduces human effort and errors
+Integrates with tools such as Git, Docker, Maven, and Kubernetes
+Supports end-to-end CI/CD automation
+Offers thousands of plugins
+Compatible with Linux, Windows, and macOS
+Common Jenkins Concepts
+Job
+
+A Jenkins job represents a task such as building, testing, or deploying an application.
+
+Build
+
+A build is the execution instance of a Jenkins job.
+
+Node
+
+A system responsible for running Jenkins tasks.
+
+Types:
+
+Controller (Master) – Manages Jenkins operations
+Agent – Performs assigned jobs
+Pipeline
+
+A collection of automated stages that define the software delivery process.
+
+Plugin
+
+Plugins extend Jenkins functionality and enable integration with external tools.
+
+Examples:
+
+Git Plugin
+Docker Plugin
+Maven Plugin
+Benefits of Jenkins
+Free and open source
+Strong DevOps tool integration
+Supports complete workflow automation
+Increases team productivity
+Can distribute workloads across multiple agents
+Key Point
+
+Jenkins is one of the most popular automation tools used in DevOps. It enables organizations to automate building, testing, and deployment processes, resulting in faster and more reliable software delivery.
