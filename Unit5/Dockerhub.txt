@@ -1,0 +1,139 @@
+CI Pipeline: Build and Push Docker Image to Docker Hub
+Objective
+
+Create a GitHub Actions workflow that automatically:
+
+Runs on every push to the main branch
+Builds a Docker image
+Authenticates with Docker Hub
+Pushes the image to Docker Hub
+Requirements
+Docker Hub Token
+
+Before creating the pipeline:
+
+Sign in to Docker Hub
+Open Account Settings → Security
+Generate an Access Token
+Save the token securely
+GitHub Secrets
+
+Add the following secrets in:
+
+Settings → Secrets and Variables → Actions
+
+DOCKER_USERNAME
+DOCKER_ACCESS_TOKEN
+
+These secrets are encrypted and not exposed in workflow logs.
+
+Project Structure
+app.py
+requirements.txt
+Dockerfile
+.github/workflows/docker-build.yml
+CI Workflow Process
+1. Workflow Trigger
+
+The pipeline starts automatically whenever code is pushed to the main branch.
+
+2. Repository Checkout
+
+GitHub Actions downloads the latest project files to the runner.
+
+3. Docker Hub Authentication
+
+Login is performed using credentials stored in GitHub Secrets.
+
+4. Docker Image Build
+
+The workflow creates a Docker image from the project's Dockerfile.
+
+Example Image Tag:
+
+username/docker-ci-app:latest
+5. Docker Image Push
+
+The generated image is uploaded to the Docker Hub repository.
+
+Pipeline Overview
+Push Code
+   ↓
+GitHub Actions Starts
+   ↓
+Checkout Source Code
+   ↓
+Docker Hub Login
+   ↓
+Build Docker Image
+   ↓
+Push Image to Docker Hub
+   ↓
+Pipeline Completed Successfully
+Environment Variables
+
+Environment variables store application configuration values.
+
+Examples
+APP_TITLE
+SERVER_PORT
+Common Uses
+Application configuration
+Port numbers
+Deployment environments
+Runtime settings
+GitHub Secrets
+
+Secrets store confidential data securely.
+
+Examples
+DOCKER_USERNAME
+DOCKER_ACCESS_TOKEN
+Common Uses
+Passwords
+API Keys
+Tokens
+Authentication credentials
+
+Secrets remain encrypted and hidden during workflow execution.
+
+Difference Between Environment Variables and Secrets
+Environment Variables
+Used for non-sensitive settings
+Accessible during workflow execution
+Suitable for application configuration
+Secrets
+Used for confidential information
+Encrypted by GitHub
+Hidden from logs and output
+Validation
+
+After the workflow completes:
+
+Open Docker Hub
+Navigate to your repository
+Verify the latest image has been uploaded
+
+Example:
+
+username/docker-ci-app
+Testing the Image
+
+Pull the image:
+
+docker pull yourusername/docker-ci-app:latest
+
+Run the container:
+
+docker run -p 5000:5000 yourusername/docker-ci-app:latest
+
+Open in browser:
+
+http://localhost:5000
+
+Expected Output:
+
+Hello from Docker CI/CD!
+Key Point
+
+This CI pipeline automates Docker image creation and publication using GitHub Actions. It also demonstrates secure authentication with GitHub Secrets and continuous integration practices used in modern DevOps workflows.
