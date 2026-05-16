@@ -1,0 +1,87 @@
+Jenkins Installation and Plugin Management
+Jenkins Installation
+
+Jenkins can be installed using multiple approaches depending on the environment and requirements.
+
+Installation Options
+Docker Container
+Quick and easy setup
+Suitable for learning and testing
+Runs Jenkins inside a containerized environment
+JAR File
+Download the Jenkins WAR file
+Start Jenkins using:
+java -jar jenkins.war
+Native Installation
+Download Jenkins from the official website
+Install using the operating system installer
+Suitable for long-term usage
+Initial Jenkins Setup
+
+After installation:
+
+Open Jenkins in a browser
+http://localhost:8080
+Unlock Jenkins using the generated administrator password
+Install recommended plugins
+Create an administrator account
+Access the Jenkins dashboard
+Creating Your First Job
+
+Steps:
+
+Select New Item
+Enter a project name
+Choose Freestyle Project
+Configure the Git repository
+Add triggers if required
+Define build actions
+Save the configuration
+Click Build Now
+
+A Jenkins job is a configured task that performs specific operations automatically.
+
+Jenkins Plugins
+
+Plugins add extra capabilities and allow Jenkins to integrate with external tools and services.
+
+Without plugins, Jenkins provides only basic automation features.
+
+Frequently Used Plugins
+Plugin	Purpose
+Git Plugin	Connects Jenkins with Git repositories
+Maven Integration	Builds Maven projects
+Docker Plugin	Supports Docker operations
+Docker Pipeline	Enables Docker within pipelines
+Pipeline Plugin	Defines CI/CD workflows as code
+HTML Publisher	Publishes HTML reports
+SSH Agent	Supports remote server access
+Role-based Authorization	Manages user permissions
+Slack Notification	Sends build notifications
+Installing Plugins
+
+Steps:
+
+Open Jenkins Dashboard
+Navigate to Manage Jenkins
+Select Manage Plugins
+Search for the required plugin
+Install the plugin
+Restart Jenkins if necessary
+
+Installing unnecessary plugins may increase resource consumption and create compatibility issues.
+
+Popular CI/CD Plugins
+Pipeline Stage View
+Pipeline REST API
+Pipeline Graph Analysis
+Maven Integration
+Docker Commons
+Docker Pipeline
+Git Server
+SSH Agent
+HTML Publisher
+Role-based Authorization Strategy
+Key Point
+
+Jenkins plugins extend the platform's capabilities and enable integration with tools commonly used in DevOps workflows. Proper installation and configuration of plugins help automate build, test, and deployment processes efficiently.
