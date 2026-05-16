@@ -1,0 +1,103 @@
+GitHub Actions and Docker Automation
+Objective
+
+Develop a Flask application, package it inside a Docker container, and use GitHub Actions to automatically build the image whenever new code is pushed.
+
+Project Layout
+docker-flask-app/
+
+├── app.py
+├── requirements.txt
+├── Dockerfile
+└── .github/workflows/docker-workflow.yml
+Implementation Steps
+1. Setup Project Directory
+Create a new project folder
+Navigate into the directory
+2. Develop Flask Application
+Create app.py
+Define the root endpoint (/)
+Return a simple welcome message
+
+Example Output:
+
+Hello from Flask Docker App!
+3. Define Dependencies
+
+Create requirements.txt and include:
+
+Flask
+4. Create Dockerfile
+
+Dockerfile tasks:
+
+Use python:3.9-slim as base image
+Set application working directory
+Copy source files
+Install required packages
+Start Flask application
+5. Create GitHub Actions Workflow
+
+Workflow file:
+
+.github/workflows/docker-workflow.yml
+
+Workflow actions:
+
+Run on push to main
+Checkout source code
+Build Docker image
+Verify image creation
+6. Upload Project to GitHub
+Initialize Git repository
+Add and commit files
+Connect GitHub repository
+Push code to main branch
+7. Validate Pipeline
+
+After pushing code:
+
+Open GitHub repository
+Select Actions
+View workflow execution
+Successful runs display a green status
+8. Configure Repository Secrets
+
+For Docker Hub publishing later, add:
+
+DOCKER_USERNAME
+DOCKER_ACCESS_TOKEN
+Running the Application
+
+Build Docker Image:
+
+docker build -t flask-docker-app .
+
+Run Container:
+
+docker run -p 5000:5000 flask-docker-app
+
+Open:
+
+http://localhost:5000
+
+Expected Result:
+
+Hello from Flask Docker App!
+Workflow Execution Flow
+Push Source Code
+      ↓
+GitHub Actions Starts
+      ↓
+GitHub Runner (Ubuntu)
+      ↓
+Checkout Repository
+      ↓
+Build Docker Image
+      ↓
+Verify Build
+      ↓
+Workflow Completed Successfully
+Key Point
+
+This project demonstrates a basic CI/CD workflow using GitHub Actions. It automates Docker image creation whenever code changes are pushed, helping streamline the software delivery process.
