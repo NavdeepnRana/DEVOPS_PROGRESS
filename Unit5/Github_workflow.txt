@@ -1,0 +1,129 @@
+GitHub Actions Practice Exercises
+Exercise 1: Find the YAML Issue
+
+Common syntax mistakes include:
+
+Missing : after name
+Missing : after on
+Missing : after runs-on
+Missing : after uses
+
+A valid workflow should:
+
+Start on a push event
+Execute on Ubuntu runner
+Checkout project source code
+Exercise 2: Run Workflow on Develop Branch
+
+Configure the workflow so that it executes only when code is pushed to the develop branch.
+
+Exercise 3: Basic Hello Workflow
+
+Tasks:
+
+Checkout repository
+Display a message on the console
+
+Example message:
+
+Hello World
+
+Used to understand workflow structure and execution.
+
+Exercise 4: Simple CI Pipeline
+
+Pipeline Stages:
+
+Checkout Source
+      ↓
+Build Application
+      ↓
+Execute Tests
+
+This represents a basic Continuous Integration process.
+
+Exercise 5: Install Packages and Run Tests
+
+Steps:
+
+Install dependencies using:
+npm install
+Execute tests using:
+npm test
+
+Commonly used in JavaScript and Node.js projects.
+
+Exercise 6: Understanding Commands
+
+Command:
+
+ls
+
+Purpose:
+
+Displays files and folders in the current directory
+Helps verify repository contents after checkout
+
+Without the checkout step, project files will not be available.
+
+Practical Scenarios
+Scenario A: Ubuntu Container
+
+Requirements:
+
+Create an Ubuntu container
+Pass environment variables
+Mount a volume
+Use interactive terminal mode
+
+Practice creating and modifying files inside the container.
+
+Scenario B: MongoDB Deployment
+
+Requirements:
+
+Pull MongoDB image
+Run container in detached mode
+Configure port mapping
+
+Useful for database container management.
+
+Scenario C: Nginx Container
+
+Requirements:
+
+Run Nginx image
+Configure environment variables
+Map container ports
+Access container interactively
+GitHub Actions Quick Notes
+Core Components
+Workflow
+Events
+Jobs
+Steps
+Actions
+Runners
+Frequently Used Triggers
+push
+pull_request
+schedule
+workflow_dispatch
+Important Features
+Environment Variables
+Matrix Strategy
+Parallel Jobs
+Job Dependencies (needs)
+Execution Flow
+Event Trigger
+      ↓
+Job Execution
+      ↓
+Workflow Steps
+      ↓
+Actions Run
+      ↓
+Final Output
+Key Point
+
+GitHub Actions helps automate software workflows by running jobs based on specific events. It is commonly used for CI/CD, testing, deployments, and infrastructure automation.
