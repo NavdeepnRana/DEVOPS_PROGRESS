@@ -1,0 +1,94 @@
+Jenkins Pipelines and CI/CD Process
+What is a Jenkins Pipeline?
+
+A Jenkins Pipeline is an automated workflow that performs tasks such as building, testing, and deploying applications. The pipeline configuration is usually stored in a file called Jenkinsfile.
+
+Benefits of Using Pipelines
+Automates software delivery
+Minimizes manual intervention
+Pipeline configuration is version-controlled
+Easy to modify and reuse
+Supports large and complex projects
+Pipeline Categories
+Declarative Pipeline
+Simple syntax
+Structured approach
+Easy for beginners
+Recommended for most projects
+Scripted Pipeline
+Based on Groovy scripting
+More control over workflow logic
+Suitable for advanced automation
+Typical CI/CD Flow
+Source Code Commit
+        ↓
+Build Application
+        ↓
+Execute Tests
+        ↓
+Create Docker Image
+        ↓
+Deploy Application
+Complete CI/CD Workflow
+Tools Involved
+GitHub
+Jenkins
+Maven
+Docker
+Common Project Files
+Application.java
+pom.xml
+Dockerfile
+Jenkinsfile
+Jenkinsfile
+
+The Jenkinsfile defines the entire pipeline process.
+
+Typical stages include:
+
+Source Checkout
+Build
+Testing
+Packaging
+Docker Build
+Deployment
+
+Jenkins automatically reads this file and executes each stage.
+
+Creating a Pipeline Job
+
+Steps:
+
+Create a new Jenkins Pipeline
+Open Project Configuration
+Select Pipeline Script from SCM
+Choose Git as SCM
+Enter GitHub Repository URL
+Select the required branch
+Set script path to Jenkinsfile
+Save and run the pipeline
+GitHub and Jenkins Integration
+
+Required files in the repository:
+
+Source Code
+Dockerfile
+pom.xml
+Jenkinsfile
+
+Whenever Jenkins detects changes in GitHub, it can pull the latest code and execute the configured pipeline.
+
+Jenkins and GitHub Actions Comparison
+Jenkins
+Installed and managed by users
+Extensive plugin support
+Highly customizable
+Common in enterprise environments
+GitHub Actions
+Available directly within GitHub
+Simple configuration using YAML
+Quick setup process
+Ideal for GitHub-hosted repositories
+Key Point
+
+Jenkins Pipelines implement the "Pipeline as Code" approach, allowing developers to automate build, test, and deployment processes. Combined with tools like GitHub, Maven, and Docker, Jenkins provides a complete CI/CD solution.
